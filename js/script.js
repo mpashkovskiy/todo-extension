@@ -91,6 +91,9 @@ var app = new Vue({
     });
   },
   methods: {
+    about: function() {
+      window.open('https://mpashkovskiy.github.io/todo-extension/', '_blank');
+    },
     exportFile: function() {
       var element = document.createElement('a');
       var text = JSON.stringify(this.data, null, 2);

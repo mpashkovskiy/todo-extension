@@ -150,6 +150,8 @@
     <b-dropdown class="fab" text="Tools" right dropup variant="outline-primary" size="sm">
       <!-- <b-dropdown-item-button disabled>Search</b-dropdown-item-button>
       <b-dropdown-item-button disabled>Create lists group</b-dropdown-item-button> -->
+      <b-dropdown-item-button v-on:click="about()">About</b-dropdown-item-button>
+      <b-dropdown-divider></b-dropdown-divider>
       <b-dropdown-item-button v-on:click="exportFile()">Export data</b-dropdown-item-button>
       <b-dropdown-item-button v-on:click="importFile()">Import data</b-dropdown-item-button>
       <b-dropdown-divider></b-dropdown-divider>
