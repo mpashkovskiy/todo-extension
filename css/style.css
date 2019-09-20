@@ -1,0 +1,137 @@
+.card
+{
+  min-height: 189px;
+}
+
+.card.card-ui,
+.card.card-nui
+{
+  min-height: 281px;
+}
+
+.list-group-item
+{
+  font-size: 80%;
+}
+
+.list-group-item:hover
+{
+  background-color: #f8f9fa;
+}
+
+.list-group-item:first-child:hover
+{
+  background-color: #fff;
+}
+
+.bg-icon
+{
+  position: absolute;
+  top: calc(50% - 20px);
+  text-align: center;
+  width: 100%;
+  z-index: -1;
+  color: lightgray;
+  font-size: 40px;
+}
+
+.tasks .list-group-item
+{
+  padding: .75rem 0.75rem;
+}
+
+.tasks .list-group-item:active
+{
+  cursor: grab;
+}
+
+.tasks input[type="checkbox"]
+{
+  margin-right: 3px;
+}
+
+.habits.container-fluid
+{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.habits.container-fluid .col
+{
+  padding-right: 0;
+}
+
+.habits.container-fluid .row
+{
+  margin-right: 0;
+}
+
+.habits .list-group-item
+{
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  line-height: 30px;
+  font-size: 70%;
+}
+
+.habits .list-group-item:first-child
+{
+  line-height: 50px;
+  font-size: 60%;
+  padding-left: 10px;
+  border-color: #fff;
+  border-top: none;
+}
+
+.habits .list-group-item:first-child .border-left
+{
+  border-color: white !important;
+}
+
+.habits .list-group-item:first-child .border-left.mon
+{
+  border-color: #dee2e6 !important;
+}
+
+.habits .habit-name
+{
+  width: 100%;
+  padding-right: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.habits .oi
+{
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.habits .date
+{
+  width: 40px;
+}
+
+.habits .date.today
+{
+  background-color: #f8f9fa;
+}
+
+.habits .date:hover,
+.habits .date.today:hover
+{
+  background-color: #d8fbe0;
+}
+
+.habits .list-group-item:first-child .date:hover
+{
+  background-color: #fff;
+}
+
+.fab
+{
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+}

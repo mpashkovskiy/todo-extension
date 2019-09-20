@@ -1,0 +1,13 @@
+{
+  "name": "ToDo",
+  "description": "Extension to keep you focused and developing hadits",
+  "version": "1.1",
+  "incognito": "split",
+  "chrome_url_overrides": { "newtab": "index.html" },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": ["storage"]
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="icon.png">
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/bootstrap-vue.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+  <!-- <link type="text/css" rel="stylesheet" href="css/bootstrap-colorpicker.css"> -->
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+  <title>ToDo</title>
+</head>
+<body>
+  <div id="app">
+
+    <div class="container-fluid habits">
+      <div class="row">
+        <div class="col">
+          <ul class="list-group">
+            <draggable
+              v-model="data.habits"
+              group="habits"
+              draggable=".list-group-item"
+              @end="save()"
+            >
+              <li
+                v-for="habit in data.habits"
+                v-if="!habit.closedTs"
+                v-on:mouseover="habit.active = true"
+                v-on:mouseout="habit.active = false"
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <div class="habit-name" v-html="habit.name" v-linkified></div>
+                <span
+                  class="oi oi-trash"
+                  aria-hidden="true"
+                  v-show="habit.active"
+                  v-on:click="closeHabit(habit)"
+                ></span>
+                <div class="d-flex">
+                  <div
+                    class="border-left date"
+                    v-for="i in days_of_habits"
+                    v-bind:class="{'bg-success': habit.dates.indexOf(dates[i]) > -1, today: isToday(dates[i])}"
+                    v-on:click="toggleHabit(habit, dates[i])"
+                  >&nbsp;</div>
+                </div>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                v-for="habit in Math.max(3 - data.habits.length, 0)"
+              >
+                <span class="oi" aria-hidden="true"></span>
+                <div class="habit-name">&nbsp;</div>
+                <div class="d-flex">
+                  <div
+                    class="border-left date"
+                    v-for="i in days_of_habits"
+                    v-bind:class="{today: isToday(dates[i])}"
+                  >&nbsp;</div>
+                </div>
+              </li>
+              <li slot="header" class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="habit-name">
+                  <b-form-input
+                    size="sm"
+                    class="mr-5"
+                    placeholder="Add daily task / habit"
+                    v-model="newHabit"
+                    v-on:keyup.enter="addHabit(newHabit)"
+                  ></b-form-input>
+                </div>
+                <div class="d-flex">
+                  <div
+                    class="date text-center border-left"
+                    v-for="i in days_of_habits"
+                    v-bind:class="{mon: isMon(dates[i]), today: isToday(dates[i])}"
+                  >{{getDate(dates[i])}}</div>
+                </div>
+              </li>
+            </draggable>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container tasks">
+      <div class="row pb-5">
+        <div
+          class="col-md-6"
+          v-for="list in data.lists"
+        >
+          <b-card
+            class="mt-4"
+            v-bind:class="'card-' + list.id"
+            no-body
+            bg-variant="transparent"
+            v-on:mouseover="list.active = true"
+            v-on:mouseout="list.active = false"
+          >
+            <b-list-group flush>
+              <draggable
+                v-model="list.items"
+                group="tasks"
+                draggable=".list-group-item"
+                @end="save()"
+              >
+                <b-list-group-item
+                  class="list-group-item"
+                  v-for="item in list.items"
+                  v-bind:key="item.id"
+                  v-if="!item.closedTs"
+                  v-on:dblclick="toggleItem(item)"
+                >
+                  <div v-if="editing != item.id">
+                    <input type="checkbox" v-on:click="remove(list, item.id)">
+                    <span class="text-break" v-html="item.text" v-linkified></span>
+                  </div>
+                  <textarea
+                    :ref="'textarea_' + item.id"
+                    class="form-control form-control-sm"
+                    rows="3"
+                    v-model="item.text"
+                    v-if="editing == item.id"
+                    v-on:keyup.enter.exact="toggleItem(item)"
+                    v-on:keyup.esc="editing = null"
+                  ></textarea>
+                </b-list-group-item>
+                <b-list-group-item slot="header">
+                    <div class="row">
+                      <div class="col-12">
+                        <b-form-input
+                          size="sm"
+                          placeholder="Add a task"
+                          v-model="list.text"
+                          v-on:keyup.enter="add(list)"
+                        ></b-form-input>
+                      </div>
+                    </div>
+                </b-list-group-item>
+              </draggable>
+            </b-list-group>
+            <div class="bg-icon"><span v-bind:class="'oi ' + icons[list.id]" aria-hidden="true"></span></div>
+          </b-card>
+        </div>
+      </div>
+
+    </div> <!-- end of the app -->
+
+    <b-dropdown class="fab" text="Tools" right dropup variant="outline-primary" size="sm">
+      <!-- <b-dropdown-item-button disabled>Search</b-dropdown-item-button>
+      <b-dropdown-item-button disabled>Create lists group</b-dropdown-item-button> -->
+      <b-dropdown-item-button v-on:click="exportFile()">Export data</b-dropdown-item-button>
+      <b-dropdown-item-button v-on:click="importFile()">Import data</b-dropdown-item-button>
+      <b-dropdown-divider></b-dropdown-divider>
+      <b-dropdown-item-button v-on:click="reset()">Reset</b-dropdown-item-button>
+      <!-- <b-dropdown-item-button disabled>About</b-dropdown-item-button> -->
+    </b-dropdown>
+
+    <input type="file" id="get_the_file" style="visibility: hidden;">
+  </div>
+
+  <script src="js/libs/linkify.min.js"></script>
+  <script src="js/libs/linkify-html.min.js"></script>
+  <!-- <script src="js/libs/vue.min.js"></script> -->
+  <script src="js/libs/vue.js"></script>
+  <script src="js/libs/Sortable.min.js"></script>
+  <script src="js/libs/vuedraggable.umd.min.js"></script>
+  <script src="js/libs/bootstrap-vue.min.js"></script>
+  <!-- <script src="js/libs/bootstrap-colorpicker.js"></script> -->
+  <script src="js/script.js"></script>
+  
+</body>
+</html>
