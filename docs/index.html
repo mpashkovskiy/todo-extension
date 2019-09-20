@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/eopgnfmokenljjoeidphdgamkagpoimf">
+    <title>ToDo Chrome extension</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-3">
+        <div class="offset-sm-3 col-sm">
+          <img class="float-sm-left mr-3 mb-3" src="favicon.png">
+          <h1>ToDo Chrome extension</h1>
+          <p>This extension helps to form habits and prioritise tasks.</p>
+
+          <!-- <a href="https://chrome.google.com/webstore/detail/eopgnfmokenljjoeidphdgamkagpoimf"><img src="imgs/ChromeWebStore_Badge_v2_496x150.png"></a> -->
+
+          <button class="btn btn-sm btn-primary" onclick="chrome.webstore.install()" id="install-button">Add to Chrome</button>
+          <a class="btn btn-sm btn-light" href="https://chrome.google.com/webstore/detail/eopgnfmokenljjoeidphdgamkagpoimf">Open in Google Web Store</a>
+          <script>
+            if (chrome.app.isInstalled) {
+              document.getElementById('install-button').style.display = 'none';
+            }
+          </script>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm text-center">
+          <img src="imgs/screen.jpg" class="img-fluid">
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-sm">
+          <p class="text-center">Inspired by:</p>
+          <div class="row">
+            <div class="col-sm-6 mb-5">
+              <div class="card">
+                <img src="imgs/franklin_small.jpg" class="card-img-top" alt="Benjamin Franklin by Joseph Duplessis, 1778">
+                <div class="card-body">
+                  <p class="card-text"><a href="http://www.gutenberg.org/ebooks/148">The Autobiography of Benjamin Franklin by Benjamin Franklin</a> and the approach he described as a <a href="http://www.gutenberg.org/files/148/148-h/148-h.htm#Page_82">"project of arriving at moral perfection"</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-5">
+              <div class="card">
+                <img src="imgs/eisenhower_small.jpg" class="card-img-top" alt="An official portrait of Dwight D. Eisenhower">
+                <div class="card-body">
+                  <p class="card-text"><a href="https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method">Dwight D. Eisenhower's Method<br />&nbsp;<br />&nbsp;</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p>
+            <strong>Why does it replace Chrome's new tab page?</strong><br />
+            If you are an engineer or a student you spend a lot of time searching for information and reading documentation online. "New Tab" in Chrome usually offers you most often visited pages which can "blur" your focus. To stay focused people install blank page extension, so it is possible to go even further and put on the page things you like to focus on.
+          </p>
+        </div>
+      </div>
+      <div class="row mt-5 mb-5">
+        <div class="col-sm">
+          <h2>Habits</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="imgs/habits.gif" class="img-fluid mb-3">
+            </div>
+            <div class="col-sm-6">
+              <p>Benjamin Franklin spent <a href="http://www.gutenberg.org/files/148/148-h/148-h.htm#Page_86">at least one week</a> developing a virtue, but according to <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ejsp.674">the research</a> by Phillippa Lally and colleagues from University College of London it takes from 18 to 254 days (66 days in average) to form a new habit, </p>
+              <p>Others believes that it takes only 21 day.</p>
+              <p>Taking it all into account top panel were developed to contain about four weeks for tracking habit forming.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 mb-5">
+        <div class="col-sm">
+          <h2>Tasks</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="imgs/tasks.gif" class="img-fluid mb-3">
+            </div>
+            <div class="col-sm-6">
+              <p>There are four quadrants on the tasks panel. They are placed accordingly to Dwight D. Eisenhower's Method:</p>
+
+              <table class="table table-bordered">
+                <tr class="text-center"><td>Important and Urgent</td><td>Important and Not Urgent</td></tr>
+                <tr class="text-center"><td>Not Important and Urgent</td><td>Not Important and Not Urgent</td></tr>
+              </table>
+
+              <p>There are two basic rules to manage tasks:</p>
+
+              <ul>
+                <li>Try to focus as much as possible on <strong>Important and Not Urgent</strong> (top right quadrant) because it affect you future the most.</li>
+                <li>Try to delegate everything else.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
